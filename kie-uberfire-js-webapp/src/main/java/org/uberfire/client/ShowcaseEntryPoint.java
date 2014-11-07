@@ -15,8 +15,6 @@
  */
 package org.uberfire.client;
 
-import static org.uberfire.workbench.model.menu.MenuFactory.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,10 +22,15 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import com.google.gwt.animation.client.Animation;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.errai.bus.client.api.BusErrorCallback;
 import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.Caller;
@@ -38,7 +41,6 @@ import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.jboss.errai.security.shared.service.AuthenticationService;
-import org.kie.uberfire.perspective.editor.client.PerspectiveEditorPerspectiveActivity;
 import org.kie.uberfire.perspective.editor.client.generator.DefaultPerspectiveEditorActivity;
 import org.kie.uberfire.perspective.editor.client.generator.DefaultPerspectiveEditorScreenActivity;
 import org.uberfire.client.menu.CustomSplashHelp;
@@ -56,12 +58,7 @@ import org.uberfire.workbench.model.menu.MenuItem;
 import org.uberfire.workbench.model.menu.MenuPosition;
 import org.uberfire.workbench.model.menu.Menus;
 
-import com.google.gwt.animation.client.Animation;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RootPanel;
+import static org.uberfire.workbench.model.menu.MenuFactory.*;
 
 /**
  * GWT's Entry-point for Uberfire-showcase
@@ -98,10 +95,7 @@ public class ShowcaseEntryPoint {
 
     @AfterInitialization
     public void startApp() {
-//        Window.alert(new Boolean(uberfireIsRunningAsExternalLibrary()).toString());
-//        if(uberfireIsRunningAsExternalLibrary()){
-//            hideLoadingPopup();
-//        }
+        hideLoadingPopup();
     }
 
     private void setupMenu( @Observes final ApplicationReadyEvent event ) {
@@ -109,35 +103,35 @@ public class ShowcaseEntryPoint {
 
         final Menus menus =
                 newTopLevelMenu( "Home" )
-                .respondsWith( new Command() {
-                    @Override
-                    public void execute() {
-                        if ( defaultPerspective != null ) {
-                            placeManager.goTo( new DefaultPlaceRequest( defaultPerspective.getIdentifier() ) );
-                        } else {
-                            Window.alert( "Default perspective not found." );
-                        }
-                    }
-                } )
-                .endMenu()
-                .newTopLevelMenu( "Perspectives" )
-                .withItems( getPerspectives() )
-                .endMenu()
-                .newTopLevelMenu( "Screens" )
-                .withItems( getScreens() )
-                .endMenu()
-                .newTopLevelCustomMenu( manager.lookupBean( CustomSplashHelp.class ).getInstance() )
-                .endMenu()
-                .newTopLevelMenu( "Logout" )
-                .position( MenuPosition.RIGHT )
-                .respondsWith( new Command() {
-                    @Override
-                    public void execute() {
-                        logout();
-                    }
-                } )
-                .endMenu()
-                .build();
+                        .respondsWith( new Command() {
+                            @Override
+                            public void execute() {
+                                if ( defaultPerspective != null ) {
+                                    placeManager.goTo( new DefaultPlaceRequest( defaultPerspective.getIdentifier() ) );
+                                } else {
+                                    Window.alert( "Default perspective not found." );
+                                }
+                            }
+                        } )
+                        .endMenu()
+                        .newTopLevelMenu( "Perspectives" )
+                        .withItems( getPerspectives() )
+                        .endMenu()
+                        .newTopLevelMenu( "Screens" )
+                        .withItems( getScreens() )
+                        .endMenu()
+                        .newTopLevelCustomMenu( manager.lookupBean( CustomSplashHelp.class ).getInstance() )
+                        .endMenu()
+                        .newTopLevelMenu( "Logout" )
+                        .position( MenuPosition.RIGHT )
+                        .respondsWith( new Command() {
+                            @Override
+                            public void execute() {
+                                logout();
+                            }
+                        } )
+                        .endMenu()
+                        .build();
 
         menubar.addMenus( menus );
     }
@@ -148,7 +142,7 @@ public class ShowcaseEntryPoint {
 
         for ( final IOCBeanDef<WorkbenchScreenActivity> _menuItem : IOC.getBeanManager().lookupBeans( WorkbenchScreenActivity.class ) ) {
             final String name;
-            if ( _menuItem.getBeanClass().equals( JSWorkbenchScreenActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorActivity.class )  || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorScreenActivity.class ) ) {
+            if ( _menuItem.getBeanClass().equals( JSWorkbenchScreenActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorScreenActivity.class ) ) {
                 name = _menuItem.getName();
             } else {
                 name = IOC.getBeanManager().lookupBean( _menuItem.getBeanClass() ).getName();
@@ -220,15 +214,15 @@ public class ShowcaseEntryPoint {
         //Sort Perspective Providers so they're always in the same sequence!
         List<PerspectiveActivity> sortedActivities = new ArrayList<PerspectiveActivity>( activities );
         Collections.sort( sortedActivities,
-                new Comparator<PerspectiveActivity>() {
+                          new Comparator<PerspectiveActivity>() {
 
-            @Override
-            public int compare( PerspectiveActivity o1,
-                                PerspectiveActivity o2 ) {
-                return o1.getDefaultPerspectiveLayout().getName().compareTo( o2.getDefaultPerspectiveLayout().getName() );
-            }
+                              @Override
+                              public int compare( PerspectiveActivity o1,
+                                                  PerspectiveActivity o2 ) {
+                                  return o1.getDefaultPerspectiveLayout().getName().compareTo( o2.getDefaultPerspectiveLayout().getName() );
+                              }
 
-        } );
+                          } );
 
         return sortedActivities;
     }
@@ -239,23 +233,29 @@ public class ShowcaseEntryPoint {
         return activityManager.getActivities( WorkbenchScreenActivity.class );
     }
 
-//    //Fade out the "Loading application" pop-up
-//    private void hideLoadingPopup() {
-//        final Element e = RootPanel.get( "loading" ).getElement();
-//
-//        new Animation() {
-//
-//            @Override
-//            protected void onUpdate( double progress ) {
-//                e.getStyle().setOpacity( 1.0 - progress );
-//            }
-//
-//            @Override
-//            protected void onComplete() {
-//                e.getStyle().setVisibility( Style.Visibility.HIDDEN );
-//            }
-//        }.run( 500 );
-//    }
+    private void hideLoadingPopup() {
+        final RootPanel loading = RootPanel.get( "loading" );
+        if ( loading != null ) {
+            fadeOutLoadingPopup( loading );
+        }
+    }
+
+    private void fadeOutLoadingPopup( RootPanel loading ) {
+        final Element e = loading.getElement();
+
+        new Animation() {
+
+            @Override
+            protected void onUpdate( double progress ) {
+                e.getStyle().setOpacity( 1.0 - progress );
+            }
+
+            @Override
+            protected void onComplete() {
+                e.getStyle().setVisibility( Style.Visibility.HIDDEN );
+            }
+        }.run( 500 );
+    }
 
     public void logout() {
         authService.call( new RemoteCallback<Void>() {
@@ -265,7 +265,8 @@ public class ShowcaseEntryPoint {
             }
         }, new BusErrorCallback() {
             @Override
-            public boolean error( Message message, Throwable throwable ) {
+            public boolean error( Message message,
+                                  Throwable throwable ) {
                 Window.alert( "Logout failed: " + throwable );
                 return true;
             }
@@ -274,15 +275,6 @@ public class ShowcaseEntryPoint {
 
     public static native void redirect( String url )/*-{
         $wnd.location = url;
-    }-*/;
-
-    public static native boolean uberfireIsRunningAsExternalLibrary( )/*-{
-        if($wnd.uberfireAsExternalLibrary) {
-            return eval($wnd.uberfireAsExternalLibrary);
-        }
-        else{
-            return false;
-        }
     }-*/;
 
 }
