@@ -21,8 +21,5 @@
     "*.iml",
     "pom.xml"
 
-  ],
-  "dependencies": {
-     "angular": "~1.0.7"
-  }
+  ]
 }
