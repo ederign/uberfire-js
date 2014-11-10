@@ -12,9 +12,12 @@
     "bower_components",
     "test",
     "tests",
+    "kie-uberfire-js-distribution-wars",
     "kie-uberfire-js-distribution-wars/*",
+     "kie-uberfire-js-webapp",
     "kie-uberfire-js-webapp/*",
     "target/*",
+     "target",
     "*.iml",
     "pom.xml"
 

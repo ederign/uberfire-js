@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>UberFire Showcase</title>
+    <link rel="stylesheet" href="css/uberfire-loading.css">
+    <link rel="stylesheet" href="css/uberfire-showcase.css">
+    <link rel="stylesheet" href="css/ruleflow.css">
+</head>
+<body>
+<iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
+
+
+<!--
+ANGULAR
+-->
+<div ng-app="myapp">
+    Write some text in textbox:
+    <input type="text" ng-model="sometext"/>
+
+    <h1>Hello {{ sometext }}</h1>
+
+    <uberfirecomponent id="id1" name="Eder" uf-component="welcome"></uberfirecomponent>
+
+</div>
+
+<!-- The GWT js file generated at run time -->
+<script type="text/javascript" src='js/org.uberfire.UberfireShowcaseClient.nocache.js'></script>
+
+<!--
+ANGULAR
+-->
+<script type="text/javascript" src="js/angular-1.0.7.min.js"></script>
+<script type="text/javascript" src="js/uberfire.components.js"></script>
+
+<script type="text/javascript">
+    erraiBusRemoteCommunicationEnabled = false;
+</script>
+
+</body>
+</html>
