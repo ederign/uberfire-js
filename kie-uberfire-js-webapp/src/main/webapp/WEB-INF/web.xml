@@ -7,43 +7,43 @@
 
   <distributable/>
 
-  <filter>
-    <filter-name>Security Filter</filter-name>
+  <!--<filter>-->
+    <!--<filter-name>Security Filter</filter-name>-->
 
-    <filter-class>org.picketlink.authentication.web.AuthenticationFilter</filter-class>
+    <!--<filter-class>org.picketlink.authentication.web.AuthenticationFilter</filter-class>-->
 
-    <init-param>
-      <param-name>authType</param-name>
-      <param-value>org.jboss.errai.security.server.FormAuthenticationScheme</param-value>
-    </init-param>
-    <init-param>
-      <param-name>form-login-page</param-name>
-      <param-value>/login.jsp</param-value>
-    </init-param>
-    <init-param>
-      <param-name>host-page</param-name>
-      <param-value>/showcase.html</param-value>
-    </init-param>
-    <init-param>
-      <param-name>forceReAuthentication</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
+    <!--<init-param>-->
+      <!--<param-name>authType</param-name>-->
+      <!--<param-value>org.uberfire.client.context.NoAuthenticationScheme</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+      <!--<param-name>form-login-page</param-name>-->
+      <!--<param-value>/login.jsp</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+      <!--<param-name>host-page</param-name>-->
+      <!--<param-value>/showcase.html</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+      <!--<param-name>forceReAuthentication</param-name>-->
+      <!--<param-value>true</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
 
-  <filter-mapping>
-    <filter-name>Security Filter</filter-name>
-    <url-pattern>/showcase.html</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>Security Filter</filter-name>-->
+    <!--<url-pattern>/showcase.html</url-pattern>-->
+  <!--</filter-mapping>-->
 
-  <filter-mapping>
-    <filter-name>Security Filter</filter-name>
-    <url-pattern>/uf_security_check</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>Security Filter</filter-name>-->
+    <!--<url-pattern>/uf_security_check</url-pattern>-->
+  <!--</filter-mapping>-->
 
-  <filter-mapping>
-    <filter-name>Security Filter</filter-name>
-    <url-pattern>*.erraiBus</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>Security Filter</filter-name>-->
+    <!--<url-pattern>*.erraiBus</url-pattern>-->
+  <!--</filter-mapping>-->
 
   <servlet>
     <servlet-name>GoogleGadget</servlet-name>
