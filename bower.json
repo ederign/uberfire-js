@@ -1,6 +1,6 @@
 {
   "name": "dorinha",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "homepage": "https://github.com/ederign/uberfire-js",
   "authors": [
     "ederign <ignatowicz@gmail.com>"
@@ -22,7 +22,7 @@
     "pom.xml"
 
   ],
-  dependencies: {
+  "dependencies": {
      "angular": "~1.0.7"
   },
 }
