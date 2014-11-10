@@ -1,0 +1,22 @@
+{
+  "name": "uberfire-js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ederign/uberfire-js",
+  "authors": [
+    "ederign <ignatowicz@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "kie-uberfire-js-distribution-wars/*",
+    "kie-uberfire-js-webapp/*",
+    "target/*",
+    "*.iml",
+    "pom.xml"
+
+  ]
+}
