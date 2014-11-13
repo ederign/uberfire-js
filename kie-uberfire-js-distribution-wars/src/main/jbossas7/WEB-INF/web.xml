@@ -70,6 +70,17 @@
     <!--<servlet-name>GoogleGadget</servlet-name>-->
     <!--<url-pattern>/org.uberfire.UberfireShowcase/google.gadget</url-pattern>-->
   <!--</servlet-mapping>-->
+  <filter-mapping>
+    <filter-name>Cors Filter</filter-name>
+    <url-pattern>*.erraiBus</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>Cors Filter</filter-name>
+
+    <filter-class>org.uberfire.backend.server.impl.CorsFilter</filter-class>
+
+  </filter>
 
   <servlet>
     <servlet-name>ErraiServlet</servlet-name>
