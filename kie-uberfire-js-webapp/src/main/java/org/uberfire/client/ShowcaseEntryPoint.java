@@ -41,8 +41,6 @@ import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.IOCBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.jboss.errai.security.shared.service.AuthenticationService;
-//import org.kie.uberfire.perspective.editor.client.generator.DefaultPerspectiveEditorActivity;
-//import org.kie.uberfire.perspective.editor.client.generator.DefaultPerspectiveEditorScreenActivity;
 import org.uberfire.client.menu.CustomSplashHelp;
 import org.uberfire.client.mvp.ActivityManager;
 import org.uberfire.client.mvp.PerspectiveActivity;
@@ -51,6 +49,8 @@ import org.uberfire.client.mvp.WorkbenchScreenActivity;
 import org.uberfire.client.screen.JSWorkbenchScreenActivity;
 import org.uberfire.client.workbench.events.ApplicationReadyEvent;
 import org.uberfire.client.workbench.widgets.menu.WorkbenchMenuBar;
+import org.uberfire.ext.perspective.editor.client.generator.DefaultPerspectiveEditorActivity;
+import org.uberfire.ext.perspective.editor.client.generator.DefaultPerspectiveEditorScreenActivity;
 import org.uberfire.mvp.Command;
 import org.uberfire.mvp.impl.DefaultPlaceRequest;
 import org.uberfire.workbench.model.menu.MenuFactory;
@@ -142,7 +142,7 @@ public class ShowcaseEntryPoint {
 
         for ( final IOCBeanDef<WorkbenchScreenActivity> _menuItem : IOC.getBeanManager().lookupBeans( WorkbenchScreenActivity.class ) ) {
             final String name;
-            if ( _menuItem.getBeanClass().equals( JSWorkbenchScreenActivity.class )) { //|| _menuItem.getBeanClass().equals( DefaultPerspectiveEditorActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorScreenActivity.class ) ) {
+            if ( _menuItem.getBeanClass().equals( JSWorkbenchScreenActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorActivity.class ) || _menuItem.getBeanClass().equals( DefaultPerspectiveEditorScreenActivity.class ) ) {
                 name = _menuItem.getName();
             } else {
                 name = IOC.getBeanManager().lookupBean( _menuItem.getBeanClass() ).getName();

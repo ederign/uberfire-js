@@ -1,4 +1,4 @@
-var app = angular.module('myapp', []);
+var app = angular.module(uberfireAngularAppName, []);
 var ids_components = new Array();
 var ids_perspectives = new Array();
 uberfireAsExternalLibrary = true;
