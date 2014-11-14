@@ -26,7 +26,6 @@
   <inherits name="org.uberfire.ext.perspective.editor.PerspectiveEditorClient"/>
   <inherits name="org.dashbuilder.DashbuilderClientAll"/>
   <inherits name="org.dashbuilder.renderer.GChartsRenderer"/>
-  <inherits name="org.dashbuilder.DisplayerScreen"/>
 
   <!-- SuperDevMode -->
   <add-linker name="xsiframe"/>
