@@ -8,10 +8,11 @@ app.directive('uberfirecomponent', function () {
     return {
         restrict: 'AE',
         replace: true,
-        scope: {
-            screen: '@'
-        },
-        template:  "<div></div>",
+//        scope: {
+//            screen: '@'
+//        },
+        transclude:true,
+        template:  "<div ng-transclude></div>",
         link: function (scope, elem, attrs) {
             callUFComponent(attrs.id);
         }
@@ -22,12 +23,14 @@ app.directive('uberfireperspective', function () {
     return {
         restrict: 'AE',
         replace: true,
-        scope: {
-            screen: '@'
-        },
-        template:  "<div></div>",
+//        scope: {
+//            screen: '@'
+//        },
+        transclude:true,
+//        template:  "<div ng-transclude></div>",
+        templateURL:'../secondNestedController.html',
         link: function (scope, elem, attrs) {
-            callUFPerspective(attrs.id);
+          //  callUFPerspective(attrs.id);
         }
     };
 });
