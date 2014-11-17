@@ -47,6 +47,8 @@ public class DynamicAngularComposite extends Composite {
 
                 @Override
                 public void onResponseReceived(Request request, Response response) {
+
+                    //maybe this is angular job
                     String template = response.getText();
                     Element domEl = DOM.createElement("div");
                     domEl.setInnerHTML(template);
@@ -65,11 +67,13 @@ public class DynamicAngularComposite extends Composite {
                     });
 
                     widget.setHTML(context.getResult().getString());
+
+                    templateIsReady(domElementId,  widget.getHTML() );
                     if (angularModule == null || angularModule.isEmpty()) {
-                        bootstrap(domElementId);
+                        //bootstrap(domElementId);
                     }
                     else {
-                        bootstrap(domElementId, angularModule);
+                        //bootstrap(domElementId, angularModule);
                     }
                 }
 
@@ -85,6 +89,9 @@ public class DynamicAngularComposite extends Composite {
 
     }
 
+    private native void templateIsReady(String id, String template) /*-{
+        $wnd.templateIsReady(id, template);
+    }-*/;
 
     private native void bootstrap(String id) /*-{
         $wnd.angular.bootstrap($doc.getElementById(id));
