@@ -11,8 +11,9 @@ app.directive('uberfirecomponent', function () {
 //        scope: {
 //            screen: '@'
 //        },
+        scope: true,
         transclude:true,
-        template:  "<div ng-transclude></div>",
+        template:  "<div></div>",
         link: function (scope, elem, attrs) {
             callUFComponent(attrs.id);
         }
@@ -26,11 +27,11 @@ app.directive('uberfireperspective', function () {
 //        scope: {
 //            screen: '@'
 //        },
+        scope: true,
         transclude:true,
-//        template:  "<div ng-transclude></div>",
-        templateURL:'../secondNestedController.html',
+        template:  "<div></div>",
         link: function (scope, elem, attrs) {
-          //  callUFPerspective(attrs.id);
+            callUFPerspective(attrs.id);
         }
     };
 });
