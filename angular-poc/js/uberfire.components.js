@@ -4,6 +4,8 @@ var ids_perspectives = new Array();
 uberfireAsExternalLibrary = true;
 var parameters_components = {};
 var parameters_perspectives = {};
+
+
 app.directive('uberfirecomponent', function () {
     return {
         restrict: 'AE',
@@ -20,21 +22,46 @@ app.directive('uberfirecomponent', function () {
     };
 });
 
-app.directive('uberfireperspective', function () {
+app.directive('uberfireperspective', function ($compile) {
     return {
         restrict: 'AE',
         replace: true,
 //        scope: {
-//            screen: '@'
+//            firstName: '='
 //        },
         scope: true,
-        transclude:true,
-        template:  "<div></div>",
+//        template:  "<div></div>",
         link: function (scope, elem, attrs) {
             callUFPerspective(attrs.id);
+            _scope = scope;
+            _element = elem;
+            _compile = $compile;
+            waitForTemplate();
         }
     };
 });
+
+var template;
+var _scope;
+var _element;
+var _compile;
+
+
+function templateIsReady(id, _template){
+    template = _template;
+}
+
+function waitForTemplate() {
+    if (!template) {
+        window.setTimeout(waitForTemplate, 1000);
+    }
+    else{
+        var linkFn = _compile(template);
+        var content = linkFn(_scope);
+        _element.append(content);
+        _scope.$digest();
+    }
+}
 
 
 function callUFPerspective(_id, _screenName) {
@@ -88,4 +115,6 @@ function waitForUFComponent() {
     }
 }
 
-
+function componentIsReady(html){
+    alert(html);
+}
