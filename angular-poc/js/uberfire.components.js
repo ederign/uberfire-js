@@ -118,7 +118,3 @@ function waitForUFComponent() {
         window.setTimeout(waitForUFComponent, 1000);
     }
 }
-
-function componentIsReady(html){
-    alert(html);
-}
