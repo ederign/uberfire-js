@@ -10,9 +10,6 @@ app.directive('uberfirecomponent', function () {
     return {
         restrict: 'AE',
         replace: true,
-//        scope: {
-//            screen: '@'
-//        },
         scope: true,
         transclude:true,
         template:  "<div></div>",
@@ -22,15 +19,11 @@ app.directive('uberfirecomponent', function () {
     };
 });
 
-app.directive('uberfireperspective', function ($compile) {
+app.directive('uberfireangularperspective', function ($compile) {
     return {
         restrict: 'AE',
         replace: true,
-//        scope: {
-//            firstName: '='
-//        },
         scope: true,
-//        template:  "<div></div>",
         link: function (scope, elem, attrs) {
             callUFPerspective(attrs.id);
             _scope = scope;
@@ -41,11 +34,22 @@ app.directive('uberfireperspective', function ($compile) {
     };
 });
 
+app.directive('uberfireperspective', function ($compile) {
+    return {
+        restrict: 'AE',
+        replace: true,
+        scope: true,
+        template:  "<div></div>",
+        link: function (scope, elem, attrs) {
+            callUFPerspective(attrs.id);
+        }
+    };
+});
+
 var template;
 var _scope;
 var _element;
 var _compile;
-
 
 function templateIsReady(id, _template){
     template = _template;

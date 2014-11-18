@@ -53,5 +53,14 @@ myapp.controller('secondControllerScope', function($scope) {
     };
 });
 
+myapp.controller('thirdControllerScope', function($scope) {
+    $scope.lastName = "Connor's";
+
+    $scope.getFullName = function ()
+    {
+        return $scope.firstName + " " + $scope.lastName;
+    };
+});
+
 
 
